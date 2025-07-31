@@ -2,7 +2,7 @@
 
 - jalankan file orders.sql di mysql
   
-  Ini akan auto generate database, table dan record
+  Ini akan auto generate database "digivo", table "orders" dan menambahkan 50 record
 
 - Buka file .env dan ubah settingan sesuai localhost. 
 
