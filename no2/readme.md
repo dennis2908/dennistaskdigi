@@ -1,6 +1,10 @@
 # Menggunakan npm ver 9.8.1, Node.js v18.18.0, Postman
 
 - jalankan file orders.sql di mysql
+  
+  Ini akan auto generate database, table dan record
+
+- Buka file .env dan ubah settingan sesuai localhost. 
 
 - jalankan npm start
 
