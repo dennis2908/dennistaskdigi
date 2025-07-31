@@ -6,8 +6,19 @@
 
 - Buka postman dan import file no4_register dari folder Postman
 
-- jalankan file postman no2 dari folder Digivo
+- jalankan file postman no4_events dari folder Digivo
 
   tampilan akan :
 
-<img width="1104" height="787" alt="image" src="https://github.com/user-attachments/assets/4c5ccd5b-842e-48f9-a289-3cd6dd77a50d" />
+<img width="1100" height="688" alt="image" src="https://github.com/user-attachments/assets/c2c58375-a204-428b-bb68-2641f6e171a6" />
+
+- jalankan file postman no4_events dari folder Digivo
+
+  tampilan akan :
+
+  <img width="1050" height="697" alt="image" src="https://github.com/user-attachments/assets/9eaa267c-5014-4b35-806e-1de0b1c87b7b" />
+ 
+  ini karena notif gagal dan retry dalam 5 menit 
+
+<img width="1022" height="265" alt="image" src="https://github.com/user-attachments/assets/a16dcc0f-0581-48b8-94dc-98b37e87fcb0" />
+
