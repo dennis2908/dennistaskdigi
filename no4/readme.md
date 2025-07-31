@@ -2,7 +2,7 @@
 
 - jalankan npm install
 
-- jalankan npm start
+- jalankan npm run dev
 
 - Buka postman dan import file no4_register dari folder Postman
 
