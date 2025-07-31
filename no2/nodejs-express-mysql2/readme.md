@@ -1,8 +1,8 @@
-# Menggunakan PHP 8.2, XAMPP, Postman
+# Menggunakan npm ver 9.8.1, Node.js v18.18.0, Postman
 
-- Extract file di XAMPP :
+- jalankan file orders.sql di mysql
 
-  localhost
+- jalankan npm start
 
 - Buka postman dan import file no2 file dari folder Postman
 

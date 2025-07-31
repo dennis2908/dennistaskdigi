@@ -1,5 +1,7 @@
 # Menggunakan PHP 8.2, XAMPP, Postman
 
+- jalankan XAMPP dan Postman
+
 - Extract file di XAMPP :
 
   localhost
