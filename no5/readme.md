@@ -12,8 +12,19 @@
 
   tampilan akan :
 
-<img width="1094" height="617" alt="image" src="https://github.com/user-attachments/assets/a6a8a8db-66c0-4fb2-a422-a2f2cd03e038" />
+  <img width="1155" height="700" alt="image" src="https://github.com/user-attachments/assets/d2cce811-5d0f-45a4-9c45-a884d143bc11" />
 
-  file akan tergenerate di folder upload 
+- jalankan file postman no5_create_token_name dari folder Digivo
 
-<img width="1017" height="319" alt="image" src="https://github.com/user-attachments/assets/d951471f-94e2-473c-95a3-319ce8032ae2" />
+  tampilan akan :
+
+  <img width="1135" height="778" alt="image" src="https://github.com/user-attachments/assets/820428af-ba7a-4c18-bb68-9ec368a5b606" />
+
+- ke file postman no5_create_token_name dan ubah otp_input di body form-data menjadi nilai otp dari output no5_input. 
+
+- Juga ubah Authorization di Header dengan nilai no5_create_token_name 
+
+  tampilan akan :
+
+  <img width="1131" height="689" alt="image" src="https://github.com/user-attachments/assets/8a4db0c0-f9ec-4576-9bb7-bba773c5943c" />
+
