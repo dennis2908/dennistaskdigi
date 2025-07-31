@@ -1,0 +1,5 @@
+Jawab : 
+
+a. 
+(i)bisa disebabkan oleh innodb_thread_concurrency yang diatur terlalu tinggi. Contoh 512. Atau terlalu rendah. Contoh : 0. Atau bisa juga karena PC atau server speknya belum sesuai dengan kebutuhan. Juga bisa disebabkan oleh driver.
+(ii) Tingkatkan spek PC / server. Update driver. Sesuaikan nilai innodb nya.

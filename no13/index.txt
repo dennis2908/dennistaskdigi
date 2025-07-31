@@ -1,0 +1,4 @@
+Jawab : 
+
+a. bisa disebabkan oleh query yang terlalu kompleks dengan join sintaksnya. Juga nilai innodb_buffer_pool_size yang terlalu kecil. Juga karena eksekusi query bersamaan alias tanpa antrian. Konfigurasi tmp_table_size dan max_heap_table_size di file .ini tau .cnf nyang kurang tepat juga bisa mempengaruhi. Indexing yang belum dilakukan juga bisa mempengaruhi over load CPU.
+b. bisa diaktifkan tapi harus melihat apakah query sudah optimasi juga. Termasuk apa sudah indexing. Apa query nya sudah di queue. Pengaruhnya terhadap Workload yakni dapat meningkatkan query speed. Juga beban query berkuarang apabila query yang sama dipanggil dari cache. Titik awal dari penyesuaian cache adalah 10-20 % dari memori RAM yang tersedia, tetapi ini juga disesuaikan berdasarkan beban kerja (workload). Kalau workloadnya tinggi maka nilai variable dari query_cache_size juga dapat menjadi 30 persen.

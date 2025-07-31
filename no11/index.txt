@@ -1,0 +1,3 @@
+Jawab : 
+
+a. (i) bisa menggunakan task manager dan query mana yang bikin lonjakan CPU. Bisa juga dengan menggunakan query SHOW FULL PROCESSLIST di MySQL untuk cek query yang bikin load tinggi. Juga bisa menggunakan log dari aplikasi seperti Laravel untuk cek saat terjadi lonjakan CPU, aplikasi sedang merequest apa.
