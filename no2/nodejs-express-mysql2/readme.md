@@ -4,9 +4,9 @@
 
   localhost
 
-- Buka postman dan import file no1 file dari folder Postman
+- Buka postman dan import file no2 file dari folder Postman
 
-- jalankan file postman no1 dari folder Digivo
+- jalankan file postman no2 dari folder Digivo
 
   tampilan akan :
 
