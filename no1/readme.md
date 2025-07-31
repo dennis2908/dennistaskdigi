@@ -1,59 +1,15 @@
-# IGSCORE Tipster Admin Panel
+# Menggunakan PHP 8.2, XAMPP, Postman
 
-This is the admin panel intended to manage data related to Tipster module on IGSCORE.
+- Extract file di XAMPP :
 
-## Tech Stack
+  localhost
 
-- PHP 8.1
-- Laravel Framework 10.48
-- MySQL 8.0
-- Redis
-- NodeJS 16
+- Buka postman dan no1 file dari folder Postman
 
-## Requirements
+- jalankan postman
 
-- Docker Desktop
-- Docker Compose
+  tampilan akan :
 
-## Development
+<img width="1094" height="617" alt="image" src="https://github.com/user-attachments/assets/a6a8a8db-66c0-4fb2-a422-a2f2cd03e038" />
 
-- Please use `develop` branch for local development.
-- The `release` branch will be used for deployment.
-- Please use pull request to merge updates into `release` branch.
-- The `main` branch will be updated to sync with `release` branch.
-
-## Local Deployment
-
-Execute the following commands on a terminal or command shell.
-
-- Build and start the Docker stacks:
-```
-docker-compose up -d
-```
-- After the containers are all up and running, install the dependencies:
-```
-docker-compose exec app composer install
-```
-- Produce the `.env` file based on `.env.example`:
-```
-cp .env.example .env
-```
-- Generate the app key:
-```
-docker-compose exec app php artisan key:generate
-```
-- Modify the `.env` file and replace the `DB` part as follows:
-```
-DB_CONNECTION=mysql
-DB_HOST=db
-DB_PORT=3306
-DB_DATABASE=igscore_tipster
-DB_USERNAME=root
-DB_PASSWORD=Password1234@@
-```
-- Resolve some permission issues:
-```
-docker-compose exec app chmod -R 777 storage
-docker-compose exec app chmod -R 777 bootstrap/cache
-```
-- Open your browser and enter `localhost:8000` to see whether the web app has been running properly.
+<img width="1017" height="319" alt="image" src="https://github.com/user-attachments/assets/d951471f-94e2-473c-95a3-319ce8032ae2" />
