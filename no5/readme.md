@@ -22,7 +22,7 @@
 
 - ke file postman no5_create_token_name dan ubah otp_input di body form-data menjadi nilai otp dari output no5_input. 
 
-- Juga ubah Authorization di Header dengan nilai no5_create_token_name 
+- Juga ubah Authorization di Header dengan nilai no5_create_token_name. Lalu jalankan file ini 
 
   tampilan akan :
 

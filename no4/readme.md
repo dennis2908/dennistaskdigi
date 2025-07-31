@@ -6,13 +6,13 @@
 
 - Buka postman dan import file no4_register dari folder Postman
 
-- jalankan file postman no4_events dari folder Digivo
+- jalankan file postman no4_register dari folder Digivo
 
   tampilan akan :
 
 <img width="1100" height="688" alt="image" src="https://github.com/user-attachments/assets/c2c58375-a204-428b-bb68-2641f6e171a6" />
 
-- jalankan file postman no4_events dari folder Digivo
+- ke file postman no4_events dari folder Digivo dan isi bookingId dengan id dari no4_register
 
   tampilan akan :
 
