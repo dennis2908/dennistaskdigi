@@ -1,17 +1,29 @@
-# Menggunakan PHP 8.2, XAMPP, Postman
+# Menggunakan XAMPP, Postman, MongoDB
 
 - Postman
+
+- MongoDB compass
+
+- Buat database baru bernama Digivo. Juga collection bernama orders, products, dan shopping_carts
 
 - jalankan npm install
 
 - jalankan npm run dev
 
-- Buka postman dan jalankan folder productSave dari folder no 9 Digivo di Postman
+- Buka postman dan jalankan file productSave dari folder no 9 Digivo di Postman
 
   tampilan akan :
 
-<img width="1094" height="617" alt="image" src="https://github.com/user-attachments/assets/a6a8a8db-66c0-4fb2-a422-a2f2cd03e038" />
+<img width="826" height="681" alt="image" src="https://github.com/user-attachments/assets/c93aaaa9-bf61-4a61-a683-f67b725e1eae" />
 
-  file akan tergenerate di folder upload 
+- ke file shoppingSave. Ganti produkId ke id balikan file productSave. Lalu jalankan postman.
 
-<img width="1017" height="319" alt="image" src="https://github.com/user-attachments/assets/d951471f-94e2-473c-95a3-319ce8032ae2" />
+  tampilan akan :
+
+<img width="1190" height="783" alt="image" src="https://github.com/user-attachments/assets/ad5d6b2f-cb74-4a1d-b7e0-290be6692ddd" />
+
+- ke file orderSave. Ganti produkId ke id balikan file productSave. Lalu jalankan postman.
+
+  tampilan akan jika berhasil :
+
+<img width="1145" height="674" alt="image" src="https://github.com/user-attachments/assets/b5bdbf1a-cd83-4200-8a98-7e5e552afa6d" />
