@@ -1,0 +1,73 @@
+Jawab
+
+a)
+    Alokasikan 70-80% dari Total RAM   
+         Perhitungan:  
+             70%×62GB=43.4GB  
+             80%×62GB=49.6GB
+             
+         Mulai dengan 43–49GB (misalnya 47GB), namun juga pantau monitoring.
+         
+             Jika working set < 47GB, maka buffer 47GB sudah optimal.  
+             Jika working set > 47GB, naikkan hingga 50GB, tetapi jangan sampai overload.     
+
+    Monitor Statistik Buffer dengan query:   
+    
+    SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool%';
+     
+         dengan Metrik Kunci:  
+             Innodb_buffer_pool_reads: Jumlah pembacaan dari disk harus rendah.  
+             Innodb_buffer_pool_read_requests: Total permintaan baca.  
+             Hitung Rasio Miss:  Buffer Pool Miss Ratio=Innodb_buffer_pool_read_requestsInnodb_buffer_pool_reads​×100%
+                 Jika rasio > 1–5%, buffer pool terlalu kecil.
+                 
+             Innodb_buffer_pool_pages_free: Jika mendekati 0, buffer pool penuh.                
+     
+Faktor-Faktor yang Perlu Dipertimbangkan: 
+
+     Total RAM Tersedia:  
+         Jangan alokasikan >80% RAM untuk buffer pool agar tidak overload.
+         
+     Ukuran Dataset dan Working Set:  
+         Buffer pool harus cukup menampung working set (data yang sering diakses).
+         
+      
+     Parameter MySQL Lainnya:  
+         Pastikan total memori MySQL (buffer pool + komponen lain) tidak melebihi RAM.
+                  
+
+b) Pengaruh Ukuran Buffer Pool yang Tidak Sesuai terhadap CPU dan Performa 
+1. Buffer Pool Terlalu rendah: 
+
+    Pengaruh terhadap server:   
+
+         Penggunaan CPU terlalu Tinggi:  
+             Data tidak ditemukan di buffer pool → banyak pembacaan dari disk (I/O bound).  
+             CPU terpakai untuk menunggu I/O disk (iowait tinggi) dan menangani context switching.  
+             Thread MySQL sering idle menunggu data dari disk, sehingga throughput turun dan CPU "sibuk" menunggu.
+             
+
+    Pengaruh terhadap Performa:   
+         Disk I/O Meningkat:  
+             Banyak operasi baca/tulis ke disk → bottleneck I/O.
+             
+         Latensi Query Tinggi:  
+             Query lambat karena harus membaca data dari disk (bukan memori).
+             
+             
+2. Buffer Pool Terlalu Besar: 
+
+    Pengaruh terhadap server:
+
+         Swapping (Memory Overload):  
+             Sistem kehabisan RAM → OS melakukan swapping ke ROM.  
+             
+    Pengaruh terhadap Performa:   
+         Performa Turun Drastis:  
+             Swapping 1000x lebih lambat dari RAM → seluruh sistem melambat.
+             
+         Tidak Ada Manfaat Tambahan:  
+             Jika working set lebih kecil dari buffer pool, sisa memori terbuang.
+             
+         Masalah pada Restart:  
+             MySQL lama memulai karena harus menginisialisasi buffer pool besar.

@@ -12,8 +12,8 @@
     "mysql",
     "restapi"
   ],
-  "author": "bezkoder",
-  "license": "ISC",
+  "author": "dmd",
+  "license": "dmd",
   "dependencies": {
     "body-parser": "^2.2.0",
     "connect": "^3.7.0",

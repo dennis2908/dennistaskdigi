@@ -1,0 +1,77 @@
+Jawab
+
+a)
+    Analisis Deadlock Menggunakan Log MySQL dan Alat Bantu 
+
+    Mengaktifkan Log Deadlock: 
+         query untuk innodb_print_all_deadlocks diaktifkan untuk mencatat semua deadlock ke error log MySQL:   
+         
+
+    SET GLOBAL innodb_print_all_deadlocks = ON;
+     
+     Deadlock juga akan tercatat di error log.
+     
+Menggunakan SHOW ENGINE INNODB STATUS: 
+
+ Query setelah deadlock terdeteksi:
+    SHOW ENGINE INNODB STATUS;     
+     
+     Output akan menampilkan bagian "LATEST DETECTED DEADLOCK" yang berisi:
+         Waktu deadlock dan nomor transaksi yang terlibat.
+         Query yang menyebabkan deadlock.
+         Lock yang dipegang dan lock yang ditunggu oleh setiap transaksi.
+         Tabel dan baris yang terkunci (termasuk indeks yang digunakan).
+         Urutan operasi yang menyebabkan deadlock.
+         
+
+Mengidentifikasi Pola Deadlock: 
+
+     Cari Tipe Lock:
+         Record Lock: Penguncian baris tertentu.
+         Gap Lock: Penguncian rentang indeks (sering terjadi di REPEATABLE READ).
+         Next-Key Lock: Kombinasi record lock + gap lock.
+         
+     Perhatikan Urutan Operasi:
+         Deadlock sering terjadi ketika dua transaksi mengunci resource dalam urutan berbeda (misal: Transaksi A mengunci Tabel X lalu Y, sedangkan Transaksi B mengunci Y lalu X).
+         
+     Analisis Isolation Level:
+         REPEATABLE READ (default MySQL) lebih rentan deadlock karena gap locking.
+
+b) Strategi Optimasi Locking untuk Menghindari Deadlock dan Mengurangi CPU Usage 
+
+1. Optimasi Aplikasi dan Query: 
+
+     Kurangi Ukuran Transaksi:
+         Pecah transaksi besar menjadi beberapa transaksi kecil untuk mengurangi waktu lock.
+         Contoh: Jangan lakukan 10.000 update dalam satu transaksi, lakukan dalam batch 1.000 baris dan dengan antrian.
+         Juga tambah waktu antrean jika diperlukan.
+
+    Lakukan server cluster untuk memecah mecah port dalam antrian        
+         
+    Hindari Lock Tidak Perlu:
+        Gunakan READ COMMITTED isolation level untuk mengurangi gap locking dengan query : 
+        SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED;
+         Hindari SELECT ... FOR UPDATE kecuali benar-benar diperlukan.
+         
+    Optimalkan Query:
+         Pastikan query menggunakan indexing
+
+2. Konfigurasi MySQL: 
+
+    Tingkatkan innodb_lock_wait_timeout:
+        Default 50 detik. Turunkan untuk mempercepat rollback transaksi yang menunggu lock dengan query :
+         
+        SET GLOBAL innodb_lock_wait_timeout = 20;
+     
+     
+ Nonaktifkan Deadlock Detection (Kasus Ekstrem):
+
+     Jika deadlock detection menyebabkan CPU tinggi, nonaktifkan (hanya untuk workload spesifik) dengan query :
+     SET GLOBAL innodb_deadlock_detect = OFF;
+       
+     Catatan: Transaksi akan menunggu hingga timeout daripada di-rollback otomatis.
+     
+
+ Optimasi Buffer Pool:
+
+     Pastikan innodb_buffer_pool_size cukup besar untuk mengurangi I/O disk yang dapat memperlambat transaksi.

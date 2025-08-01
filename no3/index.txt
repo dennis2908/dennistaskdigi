@@ -1,0 +1,32 @@
+Jawab :
+
+CREATE TABLE User (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    nomor_telepon VARCHAR(20) NOT NULL,
+    loyalty_points INT DEFAULT 0  -- Bonus: Kolom loyalty points
+);
+
+CREATE TABLE Flight (
+    flight_id INT AUTO_INCREMENT PRIMARY KEY,
+    nomor_penerbangan VARCHAR(10) NOT NULL UNIQUE,
+    asal VARCHAR(50) NOT NULL,
+    tujuan VARCHAR(50) NOT NULL,
+    waktu_keberangkatan DATETIME NOT NULL,
+    INDEX idx_asal_tujuan (asal, tujuan)  -- Efisiensi query
+);
+
+CREATE TABLE Booking (
+    booking_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    flight_id INT NOT NULL,
+    tanggal_pemesanan DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status_pemesanan ENUM('confirmed', 'cancelled', 'pending') NOT NULL,
+    jumlah_kursi INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (flight_id) REFERENCES Flight(flight_id),
+    INDEX idx_user_booking (user_id),          -- Efisiensi query
+    INDEX idx_flight_booking (flight_id),       -- Efisiensi query
+    INDEX idx_status_booking (status_pemesanan) -- Efisiensi query
+);
