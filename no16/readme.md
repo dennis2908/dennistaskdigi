@@ -2,7 +2,7 @@
 
 - install composer
 
-- ubah setingan file .env
+- ubah setingan file .env sesuai setingan mysql localhost dan database nya
 
 - jalankan composer install
 
