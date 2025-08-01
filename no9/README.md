@@ -4,7 +4,9 @@
 
 - MongoDB compass
 
-- Buat database baru bernama Digivo. Juga collection bernama orders, products, dan shopping_carts
+- Buat database baru bernama Digivo. Di database baru itu buat 3 collection yakni : orders, products, 
+
+  dan shopping_carts
 
 - jalankan npm install
 
