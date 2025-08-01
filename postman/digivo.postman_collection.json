@@ -1,0 +1,517 @@
+{
+	"info": {
+		"_postman_id": "6874be5d-997c-4742-b02b-72bdf49f1c6f",
+		"name": "digivo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13814383"
+	},
+	"item": [
+		{
+			"name": "no9",
+			"item": [
+				{
+					"name": "shoppingSave",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJuYW1lIjoiZGVubmlzIiwiaWF0IjoxNzUzODY0NTUwfQ==.a2ab94ebeee7668880e1764eb5a7ef913dfdce4732619d610577e11821681a37",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"produk_id\" : 1,\r\n    \"nama_produk\" : \"mamam\",\r\n    \"status\" : \"ready\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3002/api/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orderSave",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJuYW1lIjoiZGVubmlzIiwiaWF0IjoxNzUzODY0NTUwfQ==.a2ab94ebeee7668880e1764eb5a7ef913dfdce4732619d610577e11821681a37",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"produk_id\" : 1,\r\n    \"nama_produk\" : \"mamam\",\r\n    \"status\" : \"ready\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3002/api/orders",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3002",
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "productSave",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJuYW1lIjoiZGVubmlzIiwiaWF0IjoxNzUzODY0NTUwfQ==.a2ab94ebeee7668880e1764eb5a7ef913dfdce4732619d610577e11821681a37",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"produk_id\" : \"112321321\",\r\n    \"stock\" : 12,\r\n    \"quantity\" : 3333\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/api/products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "no5_input",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJuYW1lIjoiZGVubmlzIiwiaWF0IjoxNzUzODY0NTUwfQ==.a2ab94ebeee7668880e1764eb5a7ef913dfdce4732619d610577e11821681a37",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "otp_input",
+							"value": "04060",
+							"type": "text"
+						},
+						{
+							"key": "set_token_name",
+							"value": "dennis",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "my_name",
+							"value": "dennis",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/digivo/no5/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"digivo",
+						"no5",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no5_create_token_name",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJuYW1lIjoiZGVubmlzIiwiaWF0IjoxNzUzODY0NTUwfQ==.a2ab94ebeee7668880e1764eb5a7ef913dfdce4732619d610577e11821681a37",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "otp_input",
+							"value": "04060",
+							"type": "text"
+						},
+						{
+							"key": "set_token_name",
+							"value": "dennis",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "my_name",
+							"value": "dennis",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/digivo/no5/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"digivo",
+						"no5",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no5_cek_otp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJuYW1lIjoiZGVubmlzIiwiaWF0IjoxNzUzODY0NTUwfQ==.a2ab94ebeee7668880e1764eb5a7ef913dfdce4732619d610577e11821681a37",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "otp_input",
+							"value": "04060",
+							"type": "text"
+						},
+						{
+							"key": "set_token_name",
+							"value": "dennis",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "my_name",
+							"value": "dennis",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/digivo/no5/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"digivo",
+						"no5",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no4_register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url\": \"https://example.com/webhook\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/webhooks/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"webhooks",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no4_events",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingId\": \"BK123456\",\r\n    \"status\": \"dibayar\",\r\n    \"timestamp\": \"2023-05-15T10:30:00Z\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no1",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"    // Ensure CryptoJS is available in Postman's sandbox\r",
+							"    // If not, you may need to import it or ensure your Postman version includes it.\r",
+							"\r",
+							"    function getAuthHeader(httpMethod, requestUrl, requestBody) {\r",
+							"        // Replace with your actual client key and secret key variable names\r",
+							"        const CLIENT_KEY = pm.environment.get(\"CLIENT_KEY\");\r",
+							"        const SECRET_KEY = pm.environment.get(\"SECRET_KEY\");\r",
+							"\r",
+							"        // Normalize URL (e.g., lowercase, remove query parameters if not part of signature)\r",
+							"        // Adjust this based on your API's signature generation requirements\r",
+							"        let normalizedUrl = requestUrl.toLowerCase(); \r",
+							"        // Example: If signature does not include query params:\r",
+							"        // normalizedUrl = normalizedUrl.split('?')[0]; \r",
+							"\r",
+							"        const requestTimeStamp = Date.now().toString(); // Or a specific format required by your API\r",
+							"        const nonce = pm.globals.get(\"pm_uuid\"); // Use Postman's UUID for a unique nonce\r",
+							"\r",
+							"        let bodyHash = \"\";\r",
+							"        if (httpMethod !== 'GET' && requestBody) {\r",
+							"            // Calculate MD5 hash of the request body if it exists and method is not GET\r",
+							"            const md5 = CryptoJS.MD5(requestBody);\r",
+							"            bodyHash = CryptoJS.enc.Base64.stringify(md5);\r",
+							"        }\r",
+							"\r",
+							"        // Construct the raw data string for signing\r",
+							"        // Adjust the order and inclusion of elements based on your API's specification\r",
+							"        const signatureRawData = [CLIENT_KEY, normalizedUrl, httpMethod, requestTimeStamp, nonce, bodyHash].join(\"\");\r",
+							"\r",
+							"        // Generate HMAC-SHA512 signature\r",
+							"        const key = CryptoJS.enc.Base64.parse(SECRET_KEY); // Assuming SECRET_KEY is Base64 encoded\r",
+							"        const hmac = CryptoJS.HmacSHA512(signatureRawData, key);\r",
+							"        const hashInBase64 = CryptoJS.enc.Base64.stringify(hmac);\r",
+							"\r",
+							"        // Construct the X-Auth header value\r",
+							"        // Adjust the format based on your API's X-Auth header structure\r",
+							"        const header = [CLIENT_KEY, hashInBase64, nonce, requestTimeStamp].join(\":\");\r",
+							"        return \"X-Auth \" + header; // Assuming \"X-Auth \" prefix\r",
+							"    }\r",
+							"\r",
+							"    // Get the current request details\r",
+							"    const method = pm.request.method;\r",
+							"    const url = pm.request.url.toString(); // Convert URL object to string\r",
+							"    const body = pm.request.body ? pm.request.body.raw : ''; // Get raw body if available\r",
+							"\r",
+							"    // Generate the X-Auth header and set it as an environment variable\r",
+							"    pm.environment.set('xAuthHeader', getAuthHeader(method, url, body));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"    // Ensure CryptoJS is available in Postman's sandbox\r",
+							"    // If not, you may need to import it or ensure your Postman version includes it.\r",
+							"\r",
+							"    function getAuthHeader(httpMethod, requestUrl, requestBody) {\r",
+							"        // Replace with your actual client key and secret key variable names\r",
+							"        const CLIENT_KEY = pm.environment.get(\"CLIENT_KEY\");\r",
+							"        const SECRET_KEY = pm.environment.get(\"SECRET_KEY\");\r",
+							"\r",
+							"        // Normalize URL (e.g., lowercase, remove query parameters if not part of signature)\r",
+							"        // Adjust this based on your API's signature generation requirements\r",
+							"        let normalizedUrl = requestUrl.toLowerCase(); \r",
+							"        // Example: If signature does not include query params:\r",
+							"        // normalizedUrl = normalizedUrl.split('?')[0]; \r",
+							"\r",
+							"        const requestTimeStamp = Date.now().toString(); // Or a specific format required by your API\r",
+							"        const nonce = pm.globals.get(\"pm_uuid\"); // Use Postman's UUID for a unique nonce\r",
+							"\r",
+							"        let bodyHash = \"\";\r",
+							"        if (httpMethod !== 'GET' && requestBody) {\r",
+							"            // Calculate MD5 hash of the request body if it exists and method is not GET\r",
+							"            const md5 = CryptoJS.MD5(requestBody);\r",
+							"            bodyHash = CryptoJS.enc.Base64.stringify(md5);\r",
+							"        }\r",
+							"\r",
+							"        // Construct the raw data string for signing\r",
+							"        // Adjust the order and inclusion of elements based on your API's specification\r",
+							"        const signatureRawData = [CLIENT_KEY, normalizedUrl, httpMethod, requestTimeStamp, nonce, bodyHash].join(\"\");\r",
+							"\r",
+							"        // Generate HMAC-SHA512 signature\r",
+							"        const key = CryptoJS.enc.Base64.parse(SECRET_KEY); // Assuming SECRET_KEY is Base64 encoded\r",
+							"        const hmac = CryptoJS.HmacSHA512(signatureRawData, key);\r",
+							"        const hashInBase64 = CryptoJS.enc.Base64.stringify(hmac);\r",
+							"\r",
+							"        // Construct the X-Auth header value\r",
+							"        // Adjust the format based on your API's X-Auth header structure\r",
+							"        const header = [CLIENT_KEY, hashInBase64, nonce, requestTimeStamp].join(\":\");\r",
+							"        return \"X-Auth \" + header; // Assuming \"X-Auth \" prefix\r",
+							"    }\r",
+							"\r",
+							"    // Get the current request details\r",
+							"    const method = pm.request.method;\r",
+							"    const url = pm.request.url.toString(); // Convert URL object to string\r",
+							"    const body = pm.request.body ? pm.request.body.raw : ''; // Get raw body if available\r",
+							"\r",
+							"    // Generate the X-Auth header and set it as an environment variable\r",
+							"    pm.environment.set('xAuthHeader', getAuthHeader(method, url, body));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-Auth",
+						"value": "{{xAuthHeader}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"url_gambar\": \"https://example.com/image.jpg\",\r\n    \"persentase_kompresi\": 60\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/digivo/no1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"digivo",
+						"no1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"produk_id\" : 1,\r\n    \"nama_produk\" : \"mamam\",\r\n    \"status\" : \"ready\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:3001/api/orders",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
