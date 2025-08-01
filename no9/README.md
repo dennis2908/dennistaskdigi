@@ -24,6 +24,6 @@
 
 - ke file orderSave. Ganti produkId ke id balikan file productSave. Lalu jalankan postman.
 
-  tampilan akan jika berhasil :
+  tampilan jika berhasil :
 
 <img width="1145" height="674" alt="image" src="https://github.com/user-attachments/assets/b5bdbf1a-cd83-4200-8a98-7e5e552afa6d" />
