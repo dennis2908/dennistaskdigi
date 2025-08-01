@@ -1,32 +1,284 @@
-Jawab :
+Desain Database dan Optimasi Performa untuk Aplikasi Social Media dengan Traffic Tinggi 
+1. Skema Database 
 
 CREATE TABLE User (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    nama VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    nomor_telepon VARCHAR(20) NOT NULL,
-    loyalty_points INT DEFAULT 0  -- Bonus: Kolom loyalty points
-);
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    full_name VARCHAR(100),
+    bio TEXT,
+    profile_image_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY idx_username (username),
+    UNIQUE KEY idx_email (email)
+) ENGINE=InnoDB;
 
-CREATE TABLE Flight (
-    flight_id INT AUTO_INCREMENT PRIMARY KEY,
-    nomor_penerbangan VARCHAR(10) NOT NULL UNIQUE,
-    asal VARCHAR(50) NOT NULL,
-    tujuan VARCHAR(50) NOT NULL,
-    waktu_keberangkatan DATETIME NOT NULL,
-    INDEX idx_asal_tujuan (asal, tujuan)  -- Efisiensi query
-);
+CREATE TABLE Post (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT UNSIGNED NOT NULL,
+    content TEXT NOT NULL,
+    image_url VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+    KEY idx_user_id (user_id),
+    KEY idx_created_at (created_at),
+    KEY idx_user_created (user_id, created_at)
+) ENGINE=InnoDB;
 
-CREATE TABLE Booking (
-    booking_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    flight_id INT NOT NULL,
-    tanggal_pemesanan DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status_pemesanan ENUM('confirmed', 'cancelled', 'pending') NOT NULL,
-    jumlah_kursi INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User(user_id),
-    FOREIGN KEY (flight_id) REFERENCES Flight(flight_id),
-    INDEX idx_user_booking (user_id),          -- Efisiensi query
-    INDEX idx_flight_booking (flight_id),       -- Efisiensi query
-    INDEX idx_status_booking (status_pemesanan) -- Efisiensi query
-);
+CREATE TABLE Comment (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    post_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES Post(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+    KEY idx_post_id (post_id),
+    KEY idx_user_id (user_id),
+    KEY idx_post_created (post_id, created_at)
+) ENGINE=InnoDB;
+
+CREATE TABLE Like (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    post_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (post_id) REFERENCES Post(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE,
+    UNIQUE KEY idx_post_user (post_id, user_id),
+    KEY idx_user_id (user_id)
+) ENGINE=InnoDB;
+
+CREATE TABLE Follow (
+    follower_id BIGINT UNSIGNED NOT NULL,
+    followed_id BIGINT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (follower_id, followed_id),
+    FOREIGN KEY (follower_id) REFERENCES User(id) ON DELETE CASCADE,
+    FOREIGN KEY (followed_id) REFERENCES User(id) ON DELETE CASCADE,
+    KEY idx_followed_id (followed_id)
+) ENGINE=InnoDB;
+
+
+2. Optimasi Query Utama
+
+-- Query dasar untuk feed
+SELECT p.*, u.username, u.profile_image_url
+FROM Post p
+JOIN User u ON p.user_id = u.id
+JOIN Follow f ON f.followed_id = p.user_id
+WHERE f.follower_id = ?
+ORDER BY p.created_at DESC
+LIMIT ? OFFSET ?;
+
+-- Query untuk halaman pertama
+SELECT p.*, u.username, u.profile_image_url
+FROM Post p
+JOIN User u ON p.user_id = u.id
+JOIN Follow f ON f.followed_id = p.user_id
+WHERE f.follower_id = ?
+ORDER BY p.created_at DESC, p.id DESC
+LIMIT ?;
+
+-- Query untuk halaman berikutnya (menggunakan last_post_id dan last_created_at)
+SELECT p.*, u.username, u.profile_image_url
+FROM Post p
+JOIN User u ON p.user_id = u.id
+JOIN Follow f ON f.followed_id = p.user_id
+WHERE f.follower_id = ? 
+  AND (p.created_at < ? OR (p.created_at = ? AND p.id < ?))
+ORDER BY p.created_at DESC, p.id DESC
+LIMIT ?;
+
+EXPLAIN SELECT p.*, u.username, u.profile_image_url
+FROM Post p
+JOIN User u ON p.user_id = u.id
+JOIN Follow f ON f.followed_id = p.user_id
+WHERE f.follower_id = 123
+ORDER BY p.created_at DESC, p.id DESC
+LIMIT 20;
+
+b. Query untuk Jumlah Like dan Comment 
+
+Query untuk mendapatkan statistik post: 
+
+
+-- Query untuk satu post
+SELECT 
+    p.*,
+    u.username,
+    u.profile_image_url,
+    (SELECT COUNT(*) FROM Comment c WHERE c.post_id = p.id) AS comment_count,
+    (SELECT COUNT(*) FROM Like l WHERE l.post_id = p.id) AS like_count
+FROM Post p
+JOIN User u ON p.user_id = u.id
+WHERE p.id = ?;
+
+-- Query untuk multiple post (lebih efisien)
+SELECT 
+    p.id,
+    p.content,
+    p.created_at,
+    u.username,
+    u.profile_image_url,
+    COUNT(DISTINCT c.id) AS comment_count,
+    COUNT(DISTINCT l.id) AS like_count
+FROM Post p
+JOIN User u ON p.user_id = u.id
+LEFT JOIN Comment c ON c.post_id = p.id
+LEFT JOIN Like l ON l.post_id = p.id
+WHERE p.id IN (?, ?, ?)  -- List post IDs
+GROUP BY p.id;
+
+Optimasi dengan Denormalisasi (untuk skala sangat besar):
+
+-- Tambahkan kolom di tabel Post
+ALTER TABLE Post ADD COLUMN comment_count INT DEFAULT 0;
+ALTER TABLE Post ADD COLUMN like_count INT DEFAULT 0;
+
+-- Update trigger untuk comment_count
+DELIMITER //
+CREATE TRIGGER update_comment_count AFTER INSERT ON Comment
+FOR EACH ROW
+BEGIN
+    UPDATE Post SET comment_count = comment_count + 1 WHERE id = NEW.post_id;
+END//
+CREATE TRIGGER delete_comment_count AFTER DELETE ON Comment
+FOR EACH ROW
+BEGIN
+    UPDATE Post SET comment_count = comment_count - 1 WHERE id = OLD.post_id;
+END//
+
+-- Update trigger untuk like_count
+DELIMITER //
+CREATE TRIGGER update_like_count AFTER INSERT ON Like
+FOR EACH ROW
+BEGIN
+    UPDATE Post SET like_count = like_count + 1 WHERE id = NEW.post_id;
+END//
+CREATE TRIGGER delete_like_count AFTER DELETE ON Like
+FOR EACH ROW
+BEGIN
+    UPDATE Post SET like_count = like_count - 1 WHERE id = OLD.post_id;
+END//
+
+Query dengan denormalisasi:
+
+SELECT p.*, u.username, u.profile_image_url
+FROM Post p
+JOIN User u ON p.user_id = u.id
+WHERE p.id = ?;
+
+3. Implementasi Cache dengan Redis 
+a. Cache untuk Query Feed 
+
+const redis = require('redis');
+const client = redis.createClient();
+
+async function getFeed(userId, page, limit) {
+    const cacheKey = `feed:${userId}:${page}`;
+    const cachedData = await client.get(cacheKey);
+    
+    if (cachedData) {
+        return JSON.parse(cachedData);
+    }
+    
+    // Keyset pagination parameters
+    let query, params;
+    if (page === 1) {
+        query = `
+            SELECT p.*, u.username, u.profile_image_url
+            FROM Post p
+            JOIN User u ON p.user_id = u.id
+            JOIN Follow f ON f.followed_id = p.user_id
+            WHERE f.follower_id = ?
+            ORDER BY p.created_at DESC, p.id DESC
+            LIMIT ?`;
+        params = [userId, limit];
+    } else {
+        // Get last post data from previous page
+        const lastPostKey = `feed:last:${userId}:${page-1}`;
+        const lastPostData = await client.get(lastPostKey);
+        const { created_at, id } = JSON.parse(lastPostData);
+        
+        query = `
+            SELECT p.*, u.username, u.profile_image_url
+            FROM Post p
+            JOIN User u ON p.user_id = u.id
+            JOIN Follow f ON f.followed_id = p.user_id
+            WHERE f.follower_id = ? 
+              AND (p.created_at < ? OR (p.created_at = ? AND p.id < ?))
+            ORDER BY p.created_at DESC, p.id DESC
+            LIMIT ?`;
+        params = [userId, created_at, created_at, id, limit];
+    }
+    
+    const results = await db.query(query, params);
+    
+    // Store last post data for next page
+    if (results.length > 0) {
+        const lastPost = results[results.length - 1];
+        await client.setex(
+            `feed:last:${userId}:${page}`, 
+            3600, 
+            JSON.stringify({ created_at: lastPost.created_at, id: lastPost.id })
+        );
+    }
+    
+    // Cache feed data with TTL 5 minutes
+    await client.setex(cacheKey, 300, JSON.stringify(results));
+    
+    return results;
+}
+
+b. Cache untuk Statistik Post
+
+async function getPostStats(postId) {
+    const cacheKey = `post_stats:${postId}`;
+    const cachedData = await client.get(cacheKey);
+    
+    if (cachedData) {
+        return JSON.parse(cachedData);
+    }
+    
+    // If using denormalized counts
+    const query = `
+        SELECT comment_count, like_count
+        FROM Post
+        WHERE id = ?`;
+    
+    const [stats] = await db.query(query, [postId]);
+    
+    // Cache with TTL 5 minutes
+    await client.setex(cacheKey, 300, JSON.stringify(stats));
+    
+    return stats;
+}
+
+// Invalidate cache when post stats change
+async function invalidatePostStats(postId) {
+    await client.del(`post_stats:${postId}`);
+}
+
+c. Cache untuk Data User
+
+async function getUser(userId) {
+    const cacheKey = `user:${userId}`;
+    const cachedData = await client.get(cacheKey);
+    
+    if (cachedData) {
+        return JSON.parse(cachedData);
+    }
+    
+    const query = 'SELECT id, username, full_name, bio, profile_image_url FROM User WHERE id = ?';
+    const [user] = await db.query(query, [userId]);
+    
+    // Cache with TTL 1 hour
+    await client.setex(cacheKey, 3600, JSON.stringify(user));
+    
+    return user;
+}
